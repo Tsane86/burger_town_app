@@ -1,12 +1,17 @@
 # class here for object creation
 class Burger:
-    def __init__(self, type_of_bun):
+    def __init__(self, type_of_bun, sauce, patties, cheese, tomato, lettuce, onion, cost):
         self.bun = type_of_bun
-        #self.sauce = sauce
-        #self.cost = cost
+        self.sauce = sauce
+        self.patties = patties
+        self.cheese = cheese
+        self.tomato = tomato
+        self.lettuce = lettuce
+        self.onion = onion
+        self.cost = cost
     
     def __str__(self):
-        return f'Type of Bun: {self.bun}' # extend this out
+        return f'Type of Bun: {self.bun}, Sauce: {self.sauce}, Patties: {self.patties}, Cheese: {self.cheese}, Tomato: {self.toamto}, Lettuce: {self.lettuce}, Onion: {self.onion}, Cost: {self.cost}' # extend this out
     
 # data validation function. Will check for if the entries is one of the options for the input
 def check_input(input_options, input_question):
@@ -14,11 +19,14 @@ def check_input(input_options, input_question):
     if input_choice.lower() in input_options:
         return input_choice
     else:
-        print('Not a valid option')
+        print(f'Not a valid option. Please enter a valid option: {input_options}')
         check_input(input_options, input_question) # recursion means this will loop until valid option chosen
 
-bun_options = ['milk','gluten free']
+# options for user input
+bun_options = ['milk', 'gluten free']
 sauce_options = ['tomato', 'barbecue', 'none']
+patties_options = cheese_options = ['0', '1', '2' , '3']
+tomato_options = ['yes','no']
 
 # costs for burger
 plain_burger = 5
@@ -29,6 +37,13 @@ extra_cheese_or_salad = 1
 # store created burger objects
 burger_array = []
 
+# function to total cost
+def calculate_total_cost(burger_array):
+    total_cost = 0
+    for burger in burger_array:
+        total_cost += burger.cost
+    return total_cost
+
 # Menu
 def menu():
     print('Welcome to Codetown Burger Co!')
@@ -38,8 +53,9 @@ def menu():
             for number in range(burger_number):
                 type_of_bun = check_input(bun_options, input_question=(f"What bun type should be included for Burger {number + 1}? {bun_options}? "))
                 sauce = check_input(sauce_options, input_question=(f"What sauce should be included on Burger {number + 1}? {sauce_options}? "))
-                #patties = check_input(patties_options, input_question=(f"How many patties should be on Burger {number + 1} [0-3]"))
-                #slices_of_cheese = check_input(cheese_options, input_question=(f"How many slices of cheese should be on Burger {number + 1} [0-3]"))
+                patties = check_input(patties_options, input_question=(f"How many patties should be on Burger {number + 1} [0-3]? "))
+                slices_of_cheese = check_input(cheese_options, input_question=(f"How many slices of cheese should be on Burger {number + 1} [0-3]? "))\
+                # start here
                 cost = 5
                 if type_of_bun.lower() == 'gluten free':
                     cost += 1
@@ -51,9 +67,6 @@ def menu():
     except ValueError:
         print('Not a number. Please enter a number')
         menu()
-
-#calculate the price of the burger and display it on screen
-#include extras GF Bun = +$1, +patty = +$3, cheese or salad +$1
 
 def start_app():
     menu()
