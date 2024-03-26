@@ -9,8 +9,9 @@ class Burger:
         return f'Type of Bun: {self.bun}, Cost: {self.cost}' # extend this out
     
 # data validation function. Will check for if the entries is one of the options for the input
-def check_input(input, input_options):
-    return input.lower() in input_options #this will return true or false, which can then be used in a conditional
+def check_input(input_list, input_options):
+    for input in input_list:
+        return input.lower() in input_options #this will return true or false, which can then be used in a conditional
 
 input_options =['milk','gluten free','tomato','bbq']
 
@@ -31,17 +32,15 @@ def menu():
         if burger_number > 0 and burger_number <= 10:
             for number in range(burger_number):
                 type_of_bun = input(f'What bun type should be included for Burger {number + 1}? Milk or Gluten Free? \n')
-                if check_input(type_of_bun, input_options) != True:
-                    print('Please double check your entry')
-                    menu()
+                
                 sauce = input(f'What sauce should be included on Burger {number}? Tomato, BBQ or None? \n')
-                if check_input(sauce, input_options) != True:
+                if check_input([type_of_bun, sauce], input_options) != True:
                     print('Please double check your entry')
                     menu()
                 cost = 5
                 if type_of_bun.lower() == 'gluten free':
                     cost += 1
-                return burger_array.append(Burger(type_of_bun=type_of_bun, sauce=sauce, cost=cost))
+            return burger_array.append(Burger(type_of_bun=type_of_bun, sauce=sauce, cost=cost))
         else:
             print('Please enter a number between 1 and 10')
             menu()
