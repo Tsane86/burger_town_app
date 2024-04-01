@@ -11,7 +11,7 @@ class Burger:
         self.cost = cost
     
     def __str__(self):
-        return f'Type of Bun: {self.bun}, Sauce: {self.sauce}, Patties: {self.patties}, Cheese: {self.cheese}, Tomato: {self.toamto}, Lettuce: {self.lettuce}, Onion: {self.onion}, Cost: {self.cost}' # extend this out
+        return f'Type of Bun: {self.bun}, Sauce: {self.sauce}, Patties: {self.patties}, Cheese: {self.cheese}, Tomato: {self.tomato}, Lettuce: {self.lettuce}, Onion: {self.onion}, Cost: ${self.cost}' # extend this out
     
 # data validation function. Will check for if the entries is one of the options for the input question.
 def check_input(input_options, input_question):
@@ -26,9 +26,9 @@ def calculate_burger_cost(type_of_bun, patties, slices_of_cheese, has_lettuce, h
     cost = 5
     if type_of_bun.lower() == 'gluten free':
         cost += 1
-    if patties > 1:
+    if int(patties) > 1:
         cost += (3*(patties-1))
-    if slices_of_cheese > 1:
+    if int(slices_of_cheese) > 1:
         cost += (1*(slices_of_cheese-1))
     salad_options = [has_lettuce, has_onion, has_tomato]
     number_of_salad_items = 0
@@ -37,15 +37,13 @@ def calculate_burger_cost(type_of_bun, patties, slices_of_cheese, has_lettuce, h
             number_of_salad_items += 1
     if number_of_salad_items > 1:
        cost += (1*(number_of_salad_items-1)) 
-    return cost #TODO test this
-        
+    return cost
 
 # options for user input
 bun_options = ['milk', 'gluten free']
 sauce_options = ['tomato', 'barbecue', 'none']
 patties_options = cheese_options = ['0', '1', '2' , '3']
 tomato_options = lettuce_options = onion_options = ['yes','no']
-#TODO add more options
 
 # costs for burger
 plain_burger = 5
@@ -53,16 +51,15 @@ GF_bun = 1
 add_patty = 3
 extra_cheese_or_salad = 1
 
-# store created burger objects
-burger_array = []
-
 # function to total cost
 def calculate_total_cost(burger_array):
     total_cost = 0
     for burger in burger_array:
         total_cost += burger.cost
     return total_cost
-#TODO check this works
+
+# store created burger objects
+burger_array = []
 
 # Menu
 def menu():
@@ -78,11 +75,8 @@ def menu():
                 has_tomato = check_input(tomato_options, input_question=(f"Should Burger {number + 1} have tomato {tomato_options}? "))
                 has_lettuce = check_input(lettuce_options, input_question=(f"Should Burger {number + 1} have lettuce {lettuce_options}? "))
                 has_onion = check_input(onion_options, input_question=(f"Should Burger {number + 1} have onion {onion_options}? "))
-                cost = 5
-                #TODO cost calculator, might be easier as a function. input will need to be type of bun,
-
-                
-            return burger_array.append(Burger(type_of_bun=type_of_bun, sauce=sauce, patties=patties, cheese=slices_of_cheese, tomato=has_tomato, lettuce=has_lettuce, onion=has_onion, cost=cost))
+                cost = calculate_burger_cost(type_of_bun, int(patties), int(slices_of_cheese), has_tomato, has_lettuce, has_onion)
+                burger_array.append(Burger(type_of_bun=type_of_bun, sauce=sauce, patties=patties, cheese=slices_of_cheese, tomato=has_tomato, lettuce=has_lettuce, onion=has_onion, cost=cost))
         else:
             print('Please enter a number between 1 and 10')
             menu()
@@ -93,7 +87,10 @@ def menu():
 
 def start_app():
     menu()
-    print(burger_array)
+    if burger_array:
+        for burger in burger_array:
+            print(burger)
+        print(f'Total cost for the {len(burger_array)} burger(s) {calculate_total_cost(burger_array)}')
 
 if __name__ == '__main__':
     start_app()
