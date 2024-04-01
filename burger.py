@@ -22,6 +22,7 @@ def check_input(input_options, input_question):
         print(f'Not a valid option. Please enter a valid option: {input_options}')
         check_input(input_options, input_question) # recursion means this will loop until valid option chosen
 
+#calculate cost of burger based on min cost $5, $1 for GF bun, extra $3 per patty above 1, $1 for additional slice of cheese and $1 per salad item above 1.
 def calculate_burger_cost(type_of_bun, patties, slices_of_cheese, has_lettuce, has_onion, has_tomato):
     cost = 5
     if type_of_bun.lower() == 'gluten free':
@@ -51,7 +52,7 @@ GF_bun = 1
 add_patty = 3
 extra_cheese_or_salad = 1
 
-# function to total cost
+# function to total cost off all burgers in list
 def calculate_total_cost(burger_array):
     total_cost = 0
     for burger in burger_array:
@@ -77,6 +78,7 @@ def menu():
                 has_lettuce = check_input(lettuce_options, input_question=(f"Should Burger {number + 1} have lettuce {lettuce_options}? "))
                 has_onion = check_input(onion_options, input_question=(f"Should Burger {number + 1} have onion {onion_options}? "))
                 cost = calculate_burger_cost(type_of_bun, int(patties), int(slices_of_cheese), has_tomato, has_lettuce, has_onion)
+                #create and add burger to list
                 burger_array.append(Burger(type_of_bun=type_of_bun, sauce=sauce, patties=patties, cheese=slices_of_cheese, tomato=has_tomato, lettuce=has_lettuce, onion=has_onion, cost=cost))
         else:
             print('Please enter a number between 1 and 10')
@@ -88,10 +90,11 @@ def menu():
 
 def start_app():
     menu()
-    if burger_array:
+    if burger_array: # check if any burgers in array and then print if so, with cost.
         for burger in burger_array:
             print(f'Burger {burger_array.index(burger) + 1}: {burger}')
         print(f'Total cost for the {len(burger_array)} burger(s): ${calculate_total_cost(burger_array)}')
 
 if __name__ == '__main__':
     start_app()
+    #TODO test the use cases in the assignment description
