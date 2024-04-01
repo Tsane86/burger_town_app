@@ -68,6 +68,7 @@ def menu():
         burger_number = int(input('How many burgers would you like to order [1-10] \n'))
         if burger_number > 0 and burger_number <= 10:
             for number in range(burger_number):
+                print(f'Details for Burger {number + 1}')
                 type_of_bun = check_input(bun_options, input_question=(f"What bun type should be included for Burger {number + 1}? {bun_options}? "))
                 sauce = check_input(sauce_options, input_question=(f"What sauce should be included on Burger {number + 1}? {sauce_options}? "))
                 patties = check_input(patties_options, input_question=(f"How many patties should be on Burger {number + 1} [0-3]? "))
@@ -89,8 +90,8 @@ def start_app():
     menu()
     if burger_array:
         for burger in burger_array:
-            print(burger)
-        print(f'Total cost for the {len(burger_array)} burger(s) {calculate_total_cost(burger_array)}')
+            print(f'Burger {burger_array.index(burger) + 1}: {burger}')
+        print(f'Total cost for the {len(burger_array)} burger(s): ${calculate_total_cost(burger_array)}')
 
 if __name__ == '__main__':
     start_app()
