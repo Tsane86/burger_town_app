@@ -1,3 +1,19 @@
+# Codetown Burger Co App V1
+"""Ordering Program for Codetown Burge Co
+    Program allows users to order one or multiple burgers. 
+    This includes choosing options for:
+      - bun
+      - sauce
+      - number of pattes ($3 per additional patty)
+      - slices of cheese ($1 per additional slice of cheese)
+      - Lettuce
+      - Tomato
+      - Onion
+      All Salad options are $1 per additional item.
+
+    Program will validate user input based on options displayed on screen.
+    Once all burgers are ordered, a summary of the order and the total cost will display on screen.
+  """
 # class here for object creation
 class Burger:
     def __init__(self, type_of_bun, sauce, patties, cheese, tomato, lettuce, onion, cost):
@@ -65,7 +81,7 @@ burger_array = []
 # Menu
 def menu():
     print('Welcome to Codetown Burger Co!')
-    try: # data validation. Will error if they dont enter a number between 1 and 10
+    try: # data validation. Will error if they dont enter a number between 1 and 10, or enter something other than a number
         burger_number = int(input('How many burgers would you like to order [1-10] \n'))
         if burger_number > 0 and burger_number <= 10:
             for number in range(burger_number):
