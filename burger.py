@@ -9,7 +9,7 @@
       - Lettuce
       - Tomato
       - Onion
-      All Salad options are $1 per additional item.
+    All Salad options are $1 per additional item. Price is calculated per burger.
 
     Program will validate user input based on options displayed on screen.
     Once all burgers are ordered, a summary of the order and the total cost will display on screen.
@@ -30,7 +30,7 @@ class Burger:
         return f'Type of Bun: {self.bun}, Sauce: {self.sauce}, Patties: {self.patties}, Cheese: {self.cheese}, Tomato: {self.tomato}, Lettuce: {self.lettuce}, Onion: {self.onion}, Cost: ${self.cost}' # extend this out
     
 # data validation function. Will check for if the entries is one of the options for the input question.
-def check_input(input_options, input_question):
+def check_input(input_options, input_question): #TODO handle integers and strings better
     input_choice = input(input_question)
     if input_choice.lower() in input_options:
         return input_choice
