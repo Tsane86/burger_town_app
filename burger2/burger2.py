@@ -11,11 +11,14 @@
 def read_orders(order_text_file):
     with open(order_text_file, 'r') as file:
         orders = file.readlines()
-    if orders[0][:4] == 'milk' or orders[0][:6] == 'gluten':
-        return orders
-    else:
-        print('Error reading data.\n')
-        print('Please ensure each line of orders.txt starts with the bun type (milk or gluten free), followed by a comma, then the sauce type (tomato, barbecue or none), followed by a comma, then the number of patties (0-3), followed by a comma, then the number of slices of cheese (0-3), followed by a comma, then whether tomato is included (yes or no), followed by a comma, then whether lettuce is included (yes or no), followed by a comma, then whether onion is included (yes or no).')
+    return orders
+
+# check orders in format
+def check_orders(orders):
+    for order in orders:
+        if order[:4] != 'milk' and order[:11] != 'gluten free':
+            raise ValueError('Error reading data. Please ensure each line of orders.txt starts with the bun type (milk or gluten free), followed by a comma, then the sauce type (tomato, barbecue or none), followed by a comma, then the number of patties (0-3), followed by a comma, then the number of slices of cheese (0-3), followed by a comma, then whether tomato is included (yes or no), followed by a comma, then whether lettuce is included (yes or no), followed by a comma, then whether onion is included (yes or no).')
+        return True
 
 # convert each list item to a tuple
 def convert_to_tuple(orders):
@@ -39,7 +42,7 @@ def count_burgers(tuples, dictionary):
     return dictionary
 
 
-# sort the counts in the dictionary, descending. I learnt how to do this at: https://realpython.com/sort-python-dictionary/
+# sort the counts in the dictionary, descending. Reference: https://realpython.com/sort-python-dictionary/
 def sort_burger_dict(dictionary):
     sort_dict = dict(sorted(dictionary.items(), key=lambda item: item[1], reverse=True))
     return sort_dict
@@ -48,7 +51,6 @@ def sort_burger_dict(dictionary):
 plain_burger = 5
 GF_bun = 1
 add_patty = 3
-extra_cheese_or_salad = 1
 
 # calculate burger costs
 def get_cost(burger):
@@ -81,14 +83,20 @@ def top_burgers_cost(sorted_burgers):
 # application start
 def start_app():
     orders = read_orders('orders.txt')
-    tuples = convert_to_tuple(orders)
-    burger_dictionary = create_burger_dict(tuples)
-    counted_burgers = count_burgers(tuples, burger_dictionary)
-    sorted_burgers = sort_burger_dict(counted_burgers)
-    input_number = int(input('How many top burgers would you like to output? \n'))
-    top_burgers = top_burgers_cost(sorted_burgers)
-    for burger in top_burgers[:input_number]:
-        print(burger)
+    if check_orders(orders):
+        tuples = convert_to_tuple(orders)
+        burger_dictionary = create_burger_dict(tuples)
+        counted_burgers = count_burgers(tuples, burger_dictionary)
+        sorted_burgers = sort_burger_dict(counted_burgers)
+        input_number = input('How many top burgers would you like to output? \n')
+        try:
+            integer_input = int(input_number)
+            if integer_input > 0:
+                top_burgers = top_burgers_cost(sorted_burgers)
+                for burger in top_burgers[:int(input_number)]:
+                    print(burger)
+            else: print("Invalid value. Please enter a posiive integer")
+        except ValueError: print("Invalid value. Please enter a posiive integer")
 
 if __name__ == '__main__':
     start_app()
