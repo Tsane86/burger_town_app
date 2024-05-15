@@ -5,6 +5,7 @@
     User can click on each button to see the details of the burger.
 
     Type python3 burger3.py to run the program. This will launch the GUI interface.
+    Close window to exit.
 """
 
 # import packages
@@ -36,7 +37,7 @@ code_cruncher = Burger('Code Cruncher','Milk', 'Tomato', 3, 3, 'yes', 'yes', 'ye
 def change_label(burger, label):
     label.config(text=f"Burger Name: {burger.name} \n\n Type of Bun: {burger.bun} \n\n Type of Sauce: {burger.sauce}\n\n Number of Patties: {burger.patties} \n\n Number of Cheese Slices: {burger.cheese} \n\n Tomato: {burger.tomato} \n\n Lettuce: {burger.lettuce} \n\n Onion: {burger.onion} \n\n Cost: ${burger.cost}")
 
-# window controls and config
+# window controls and config. Reference https://realpython.com/python-gui-tkinter/
 burger_window = tk.Tk()
 burger_window.resizable(width=False, height=False)
 burger_window.title("Welcome to Codetown Burger")
@@ -50,7 +51,8 @@ ctrl_button = tk.Button(burger_window, text="Ctrl-Alt-Delicious", fg='black', bg
 data_button = tk.Button(burger_window, text="Data Crunch", fg='black', bg='white', padx=5, pady=5)
 code_button = tk.Button(burger_window, text="Code Cruncher", fg='black', bg='white', padx=5, pady=5)
 
-# when clicked, show the burger details in a the current window
+#when left mouse clicked, show the burger details in a the current window using the change_label function
+#reference: https://realpython.com/python-gui-tkinter/#making-your-applications-interactive
 byte_button.bind("<Button-1>", lambda event: change_label(byte_burger, label1))
 ctrl_button.bind("<Button-1>", lambda event: change_label(ctrl_alt_delicious, label1))
 data_button.bind("<Button-1>", lambda event: change_label(data_crunch, label1))
