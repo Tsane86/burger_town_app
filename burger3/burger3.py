@@ -32,23 +32,23 @@ ctrl_alt_delicious = Burger('Ctrl-Alt-Delicious','Milk', 'Barbecue', 2, 2, 'yes'
 data_crunch = Burger('Data Crunch','Gluten free', 'Tomato', 0, 0, 'yes', 'yes', 'yes', 8)
 code_cruncher = Burger('Code Cruncher','Milk', 'Tomato', 3, 3, 'yes', 'yes', 'yes', 15)
 
-# function to change label
+# function to change label, pass in burger to be displayed after change
 def change_label(burger, label):
-    label.config(text=f"Burger Name: {burger.name} \n Type of Bun: {burger.bun} \n Type of Sauce: {burger.sauce}\n Number of Patties: {burger.patties} \n Number of Cheese Slices: {burger.cheese} \n Tomato: {burger.tomato} \n Lettuce: {burger.lettuce} \n Onion: {burger.onion} \n Cost: ${burger.cost}")
+    label.config(text=f"Burger Name: {burger.name} \n\n Type of Bun: {burger.bun} \n\n Type of Sauce: {burger.sauce}\n\n Number of Patties: {burger.patties} \n\n Number of Cheese Slices: {burger.cheese} \n\n Tomato: {burger.tomato} \n\n Lettuce: {burger.lettuce} \n\n Onion: {burger.onion} \n\n Cost: ${burger.cost}")
 
 # window controls and config
 burger_window = tk.Tk()
 burger_window.resizable(width=False, height=False)
 burger_window.title("Welcome to Codetown Burger")
-label1 = tk.Label(burger_window, text=f"Burger Name: {byte_burger.name} \n Type of Bun: {byte_burger.bun} \n Type of Sauce: {byte_burger.sauce}\n Number of Patties: {byte_burger.patties} \n Number of Cheese Slices: {byte_burger.cheese} \n Tomato: {byte_burger.tomato} \n Lettuce: {byte_burger.lettuce} \n Onion: {byte_burger.onion} \n Cost: ${byte_burger.cost}", fg='black', bg='white')
+label1 = tk.Label(burger_window, text=f"Burger Name: {byte_burger.name} \n\n Type of Bun: {byte_burger.bun} \n\n Type of Sauce: {byte_burger.sauce}\n\n Number of Patties: {byte_burger.patties} \n\n Number of Cheese Slices: {byte_burger.cheese} \n\n Tomato: {byte_burger.tomato} \n\n Lettuce: {byte_burger.lettuce} \n\n Onion: {byte_burger.onion} \n\n Cost: ${byte_burger.cost}", fg='black', bg='white', padx=10, pady=10)
 
 # after 5 seconds, cycle to next burger option
 
 # create buttons for each burger option
-byte_button = tk.Button(burger_window, text="Byte Burger", fg='black', bg='white')
-ctrl_button = tk.Button(burger_window, text="Ctrl-Alt-Delicious", fg='black', bg='white')
-data_button = tk.Button(burger_window, text="Data Crunch", fg='black', bg='white')
-code_button = tk.Button(burger_window, text="Code Cruncher", fg='black', bg='white')
+byte_button = tk.Button(burger_window, text="Byte Burger", fg='black', bg='white', padx=5, pady=5)
+ctrl_button = tk.Button(burger_window, text="Ctrl-Alt-Delicious", fg='black', bg='white', padx=5, pady=5)
+data_button = tk.Button(burger_window, text="Data Crunch", fg='black', bg='white', padx=5, pady=5)
+code_button = tk.Button(burger_window, text="Code Cruncher", fg='black', bg='white', padx=5, pady=5)
 
 # when clicked, show the burger details in a the current window
 byte_button.bind("<Button-1>", lambda event: change_label(byte_burger, label1))

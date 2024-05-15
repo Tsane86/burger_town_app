@@ -11,3 +11,5 @@ Python 3
 
 To use, run:
 python3 burger.py
+
+Close window to exit.
