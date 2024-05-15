@@ -41,7 +41,6 @@ def count_burgers(tuples, dictionary):
         dictionary[order] += 1
     return dictionary
 
-
 # sort the counts in the dictionary, descending. Reference: https://realpython.com/sort-python-dictionary/
 def sort_burger_dict(dictionary):
     sort_dict = dict(sorted(dictionary.items(), key=lambda item: item[1], reverse=True))
