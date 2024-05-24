@@ -44,20 +44,14 @@ burger_window.title("Welcome to Codetown Burger")
 label1 = tk.Label(burger_window, text=f"Burger Name: {byte_burger.name} \n\n Type of Bun: {byte_burger.bun} \n\n Type of Sauce: {byte_burger.sauce}\n\n Number of Patties: {byte_burger.patties} \n\n Number of Cheese Slices: {byte_burger.cheese} \n\n Tomato: {byte_burger.tomato} \n\n Lettuce: {byte_burger.lettuce} \n\n Onion: {byte_burger.onion} \n\n Cost: ${byte_burger.cost}", fg='black', bg='white', padx=10, pady=10)
 
 # after 5 seconds, cycle to next burger option
+# no idea on this one :(
 
-
-# create buttons for each burger option
-byte_button = tk.Button(burger_window, text="Byte Burger", fg='black', bg='white', padx=5, pady=5)
-ctrl_button = tk.Button(burger_window, text="Ctrl-Alt-Delicious", fg='black', bg='white', padx=5, pady=5)
-data_button = tk.Button(burger_window, text="Data Crunch", fg='black', bg='white', padx=5, pady=5)
-code_button = tk.Button(burger_window, text="Code Cruncher", fg='black', bg='white', padx=5, pady=5)
-
-#when left mouse clicked, show the burger details in a the current window using the change_label function
-#reference: https://realpython.com/python-gui-tkinter/#making-your-applications-interactive
-byte_button.bind("<Button-1>", lambda event: change_label(byte_burger, label1))
-ctrl_button.bind("<Button-1>", lambda event: change_label(ctrl_alt_delicious, label1))
-data_button.bind("<Button-1>", lambda event: change_label(data_crunch, label1))
-code_button.bind("<Button-1>", lambda event: change_label(code_cruncher, label1))
+# create buttons for each burger option, include command to change label. 
+# have to use Lamnda to pass in the burger object and label1 into the function. Reference: https://www.geeksforgeeks.org/using-lambda-in-gui-programs-in-python/
+byte_button = tk.Button(burger_window, text="Byte Burger", fg='black', bg='white', padx=5, pady=5, command = lambda : change_label(byte_burger, label1))
+ctrl_button = tk.Button(burger_window, text="Ctrl-Alt-Delicious", fg='black', bg='white', padx=5, pady=5, command = lambda : change_label(ctrl_alt_delicious, label1))
+data_button = tk.Button(burger_window, text="Data Crunch", fg='black', bg='white', padx=5, pady=5, command = lambda : change_label(data_crunch, label1))
+code_button = tk.Button(burger_window, text="Code Cruncher", fg='black', bg='white', padx=5, pady=5, command = lambda : change_label(code_cruncher, label1))
 
 # pack
 label1.pack()
