@@ -38,7 +38,7 @@ def check_input(input_options, input_question): #TODO handle integers and string
         print(f'Not a valid option. Please enter a valid option: {input_options}')
         return check_input(input_options, input_question) # recursion means this will loop until valid option chosen
 
-#calculate cost of burger based on min cost $5, $1 for GF bun, extra $3 per patty above 1, $1 for additional slice of cheese and $1 per salad item above 1.
+# calculate cost of burger based on min cost $5, $1 for GF bun, extra $3 per patty above 1, $1 for additional slice of cheese and $1 per salad item above 1.
 def calculate_burger_cost(type_of_bun, patties, slices_of_cheese, has_lettuce, has_onion, has_tomato):
     cost = 5
     if type_of_bun.lower() == 'gluten free':
